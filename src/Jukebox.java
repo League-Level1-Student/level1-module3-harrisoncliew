@@ -4,6 +4,8 @@
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -11,7 +13,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -19,18 +24,40 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
+public class Jukebox implements Runnable, ActionListener {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
+	}
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton button1 = new JButton();
+	JButton button2 = new JButton();
+	JButton button3 = new JButton();
+	
+	public void setup() {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		button1.setText("Piano Melody");
+		button2.setText("Violin Melody");
+		button3.setText("Flute Melody");
+		button1.addActionListener(this);
+		button2.addActionListener(this);
+		button3.addActionListener(this);;
 	}
 
            public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
+        	  Song s = new Song("Simple-peaceful-piano-melody.mp3");
+        	  Song v = new Song("Maria-theresia-von-paradis-sicilienne.mp3");
 
 		// 5. Play the Song
+        	   
 
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
@@ -45,6 +72,15 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.equals(button1)) {
+			
+		}
+		
 	}
 
 }
